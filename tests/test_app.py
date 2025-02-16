@@ -11,8 +11,9 @@ class TestApp(unittest.TestCase):
 
     def test_invalid_url(self):
         response = self.client.post('/', data={'url': 'invalid_url'})
-        self.assertNotEqual(response.status_code, 200)  # Expect failure
-        self.assertIn(b'Invalid URL', response.data)  # Ensure error message appears
+        self.assertEqual(response.status_code, 400)  # ✅ Expect 400 Bad Request
+        self.assertIn(b'Invalid URL', response.data)  # ✅ Check if 'Invalid URL' is in response
+
 
 if __name__ == '__main__':
     unittest.main()

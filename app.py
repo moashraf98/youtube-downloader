@@ -38,14 +38,13 @@ def download_video(url, download_dir):
 def index():
     if request.method == 'POST':
         url = request.form['url']
-        choice = request.form['choice']
-        if choice not in ['1', '2']:
-            flash('Invalid choice. Please select 1 or 2.')
-            return redirect(url_for('index'))
-
-        result = download_video(url, DOWNLOAD_DIR)
-        flash(result)
-        return redirect(url_for('index'))
+        try:
+            yt = YouTube(url)
+            stream = yt.streams.get_highest_resolution()
+            stream.download(output_path="downloads/")
+            return "Download Successful"
+        except Exception:
+            return "Invalid URL", 400  # ✅ Ensure error message is sent correctly
 
     return render_template('index.html')
 
