@@ -22,12 +22,6 @@
       when: cluster_exists.rc != 0
 
 
-    - name: Install Nginx Ingress Controller
-      shell: |
-              /usr/local/bin/kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
-      ignore_errors: yes
-
-
 
     - name: Apply Kubernetes Manifests
-      shell: /usr/local/bin/kubectl apply -f deployment.yaml -f service.yaml -f ingress.yaml
+      shell: /usr/local/bin/kubectl apply -f deployment.yaml -f service.yaml -f 
