@@ -24,4 +24,4 @@
 
 
     - name: Apply Kubernetes Manifests
-      shell: /usr/local/bin/kubectl apply -f deployment.yaml -f service.yaml -f 
+      shell: /usr/local/bin/kubectl apply -f deployment.yaml -f service.yaml 
