@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: youtube-downloader
+  labels:
+    app: youtube-downloader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: youtube-downloader
+  template:
+    metadata:
+      labels:
+        app: youtube-downloader
+    spec:
+      containers:
+        - name: youtube-downloader
+          image: mohamedashrafx98/youtube-downloader:latest
+          ports:
+            - containerPort: 5000
