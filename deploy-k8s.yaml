@@ -2,14 +2,25 @@
   hosts: localhost
   become: yes
   tasks:
+    - name: Check if KIND is installed
+      shell: test -x /usr/local/bin/kind
+      register: kind_installed
+      ignore_errors: yes
+
     - name: Ensure KIND is installed
-      shell: command -v kind
-      register: kind_exists
+      fail:
+        msg: "KIND is not installed! Please install it or add it to the PATH."
+      when: kind_installed.rc != 0
+
+    - name: Check if Kubernetes cluster exists
+      shell: /usr/local/bin/kind get clusters | grep -w youtube-cluster
+      register: cluster_exists
       ignore_errors: yes
 
     - name: Create Kubernetes cluster (if not exists)
-      shell: /usr/local/bin/kind create cluster --name youtube-cluster
-      when: kind_exists.rc != 0
+      command: /usr/local/bin/kind create cluster --name youtube-cluster
+      when: cluster_exists.rc != 0
+
 
     - name: Apply Kubernetes Manifests
       shell: kubectl apply -f deployment.yaml service.yaml
