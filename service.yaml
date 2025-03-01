@@ -9,5 +9,4 @@ spec:
     - protocol: TCP
       port: 5000         # The port exposed on the Service (inside the cluster)
       targetPort: 5000 # The container's port
-      nodePort: 30050  # External access via NodePort (must be in 30000-32767 range)
-  type: NodePort
+  type: ClusterIP
