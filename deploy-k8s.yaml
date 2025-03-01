@@ -1,0 +1,15 @@
+- name: Deploy YouTube Downloader to Kubernetes
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Ensure KIND is installed
+      shell: command -v kind
+      register: kind_exists
+      ignore_errors: yes
+
+    - name: Create Kubernetes cluster (if not exists)
+      shell: kind create cluster --name youtube-cluster
+      when: kind_exists.rc != 0
+
+    - name: Apply Kubernetes Manifests
+      shell: kubectl apply -f deployment.yaml service.yaml
