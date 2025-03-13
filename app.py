@@ -6,7 +6,7 @@ from yt_dlp import YoutubeDL
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Change this to a secure key in production
 
-DOWNLOAD_DIR = 'Downloads'
+DOWNLOAD_DIR = '/app/downloads'
 
 # def download_video(url, download_dir):
 #     ydl_opts = {
