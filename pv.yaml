@@ -9,15 +9,4 @@ spec:
     - ReadWriteOnce
   hostPath:
     path: "/mnt/data/youtube-downloads"
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: youtube-downloader-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-  volumeName: youtube-downloader-pv
+
