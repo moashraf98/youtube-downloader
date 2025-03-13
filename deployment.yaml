@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: youtube-downloader
-  labels:
-    app: youtube-downloader
 spec:
   replicas: 1
   selector:
@@ -15,7 +13,14 @@ spec:
         app: youtube-downloader
     spec:
       containers:
-        - name: youtube-downloader
-          image: mohamedashrafx98/youtube-downloader:latest
-          ports:
-            - containerPort: 5000
+      - name: youtube-downloader
+        image: mohamedashrafx98/youtube-downloader:latest
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: downloads-volume
+          mountPath: /app/downloads  # Mounts persistent storage for downloaded videos
+      volumes:
+      - name: downloads-volume
+        persistentVolumeClaim:
+          claimName: youtube-downloader-pvc
