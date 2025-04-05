@@ -9,7 +9,7 @@ DOWNLOAD_DIR = '/app/downloads'
 
 def download_video(url, download_dir):
     ydl_opts = {
-        'format': 'bestvideo+bestaudio/best',
+        'format': 'best',
         'outtmpl': os.path.join(download_dir, '%(title)s.%(ext)s'),
         'user_agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
     }
