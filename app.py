@@ -41,7 +41,7 @@ def index():
         try:
             yt = YouTube(url)
             stream = yt.streams.get_highest_resolution()
-            stream.download(output_path="downloads/")
+            stream.download(output_path=DOWNLOAD_DIR)
             return "Download Successful"
         except Exception:
             return "Invalid URL", 400  # ✅ Ensure error message is sent correctly
